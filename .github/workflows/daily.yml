@@ -1,0 +1,22 @@
+name: Daily Contribution
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Runs every day at 12:00 PM UTC
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Make daily commit
+        run: |
+          echo "Daily update: $(date)" >> daily-log.txt
+          git config user.email "alfiyasayyad903@gmail.com"
+          git config user.name "Piya9204"
+          git add daily-log.txt
+          git commit -m "Daily update: $(date)"
+          git push
